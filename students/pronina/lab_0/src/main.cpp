@@ -34,14 +34,13 @@ int main(int argc, char** argv)
 	}
 	else if (method == "lines")
 	{
+		dst = Mat::zeros(src.size(), CV_8UC3);
+		
 		Mat src_edges;
-
 		Canny(src, src_edges, 50, 200);
 
 		vector<Vec2f> lines;
-		HoughLines(src_edges, lines, 1, CV_PI/180, 150, 0, 0 );
-
-		src.copyTo(dst);
+		HoughLines(src_edges, lines, 1, CV_PI/180, 150, 0, 0);
 
 		for (int i = 0; i < lines.size(); i++)
 		{
@@ -50,15 +49,16 @@ int main(int argc, char** argv)
 			double a = cos(theta), b = sin(theta);
 			double x0 = a * rho, y0 = b * rho;
 			pt1.x = cvRound(x0 + 1000 * (-b));
-			pt1.y = cvRound(y0 + 1000 * (a));
+			pt1.y = cvRound(y0 + 1000 * a);
 			pt2.x = cvRound(x0 - 1000 * (-b));
-			pt2.y = cvRound(y0 - 1000 * (a));
-			line(dst, pt1, pt2, Scalar(0, 0, 255), 3, CV_AA);
+			pt2.y = cvRound(y0 - 1000 * a);
+			line(dst, pt1, pt2, Scalar(0, 0, 255), 1, CV_AA);
 		}
 	}
 
-	imshow("Picture", src);
-	imshow("Result", dst);
+	imshow("Original picture", src);
+	imshow(method, dst);
 	waitKey(0);
+
 	return 0;
 }
