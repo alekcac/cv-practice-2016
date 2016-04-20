@@ -40,7 +40,9 @@ int main(int argc, char** argv)
 
 		vector<Vec2f> lines;
 		HoughLines(src_edges, lines, 1, CV_PI/180, 150, 0, 0 );
+
 		src.copyTo(dst);
+
 		for (int i = 0; i < lines.size(); i++)
 		{
 			float rho = lines[i][0], theta = lines[i][1];
