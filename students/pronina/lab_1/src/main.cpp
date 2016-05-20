@@ -54,8 +54,8 @@ int main(int argc, char** argv)
 		char* string_params[] = {argv[1], dist_window_name, smooth_window_name};
 		void* params[] = {int_params, string_params};
 
-		createTrackbar("Threshold:", dist_window_name, &int_params[0], 100, Smoothing, params);
-		createTrackbar("Kernel divider:", smooth_window_name, &int_params[1], 20, Smoothing, params);
+		createTrackbar("Threshold:", dist_window_name, int_params, 100, Smoothing, params);
+		createTrackbar("Kernel divider:", smooth_window_name, int_params + 1, 20, Smoothing, params);
 
 		Smoothing(0, params);
 		waitKey(0);
