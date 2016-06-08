@@ -88,7 +88,10 @@ void drawKpt(Mat& img, const KeyPoint& p, const Scalar& color, int flags, Point 
 		circle(img, center, radius, color, 1, CV_AA);
 	}
 }
-
+float angle(const Point2f &v1)
+{
+	return atan(v1.y / v1.x);
+}
 int main(int argc, char* argv[])
 {
 	if (argc < 3)
